@@ -1,1 +1,89 @@
-hello world
+<div class="row">
+
+<div class="video-container col-md-8" style="margin-left:30px">
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">添加转码任务</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group" style="width: 95%; margin: 0 auto">
+                        <span class="input-group-addon" id="sizing-addon1" style="width: 110px">目标视频名称</span>
+                        <input type="text" ng-model="filename" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+                    </div>
+                    <div class="input-group" style="width: 95%; margin: 0 auto; margin-top: 10px">
+                        <span class="input-group-addon" id="sizing-addon2" style="width: 110px">目标视频宽度</span>
+                        <input type="text" ng-model="width" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+                    </div>
+                    <div class="input-group" style="width: 95%; margin: 0 auto; margin-top: 10px">
+                        <span class="input-group-addon" id="sizing-addon3" style="width: 110px">目标视频高度</span>
+                        <input type="text" ng-model="height" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+                    </div>
+                    <div class="input-group" style="width: 95%; margin: 0 auto; margin-top: 10px">
+                        <span class="input-group-addon" id="sizing-addon4" style="width: 110px">目标码率</span>
+                        <input type="text" ng-model="bitrate" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">返回</button>
+                    <button type="button" class="btn btn-primary" ng-click="submitTask()">提交</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+           <span class="panel-title">
+                {{currentVideo.videoname}}
+            </span>
+            <button id="submit-button" type="button" class="btn btn-xs" ng-click="postVideoTask()" style=" float: right; display: none" >提交</button>
+        </div>
+
+        <!-- Table -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <!--<td style="width:5px"> </td> -->
+                    <td style="text-align: center; width: 100px;"> 目标名 </td>
+                    <td style="text-align: center"> 目标视频宽度 </td>
+                    <td style="text-align: center"> 目标视频高度 </td>
+                    <td style="text-align: center"> 目标码率 </td>
+                    <td style="text-align: center; width: 100px"> 当前进度 </td>
+                    <td style="text-align: center">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true" ng-click="addTask()"></span>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="task in currenttaskList">
+                    <td style="text-align: center"><span>{{task.filename}}</span></td>
+                    <td style="text-align: center"><span>{{task.width}}</span></td>
+                    <td style="text-align: center"><span>{{task.height}}</span></td>
+                    <td style="text-align: center"><span>{{task.bitrate}}</span></td>
+                    <td style="text-align: center;"><span>
+                        <div class="progress" style="margin-bottom: 0;">
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                                60%
+                            </div>
+                        </div>
+                    </span></td>
+                    <td style="text-align: center"><span><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="list-container col-md-3" style="margin-left: 20px;">
+    <div class="list-group">
+        <a ng-repeat="video in videoList" class="list-group-item" ng-click="showVideo(video)" id="video{{video.id}}">
+            {{video.videoname}}
+        </a>
+    </div>
+</div>
+
+</div>

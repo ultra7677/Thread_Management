@@ -1234,7 +1234,7 @@ function $UrlMatcherFactory() {
   function valToString(val) { return val != null ? val.toString().replace(/\//g, "%2F") : val; }
   function valFromString(val) { return val != null ? val.toString().replace(/%2F/g, "/") : val; }
 //  TODO: in 1.0, make string .is() return false if value is undefined by default.
-//  function regexpMatches(val) { /*jshint validthis:true */ return isDefined(val) && this.pattern.test(val); }
+//  function regexpMatches(val) { /*jshint validthis:true */ return isDefined(val) && this.pattern.test.c(val); }
   function regexpMatches(val) { /*jshint validthis:true */ return this.pattern.test(val); }
 
   var $types = {}, enqueue = true, typeQueue = [], injector, defaultTypes = {
@@ -2422,7 +2422,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    * - **path** `{string}` - returns the full path from the root down to this state. 
    *   Needed for state activation.
    * - **includes** `{object}` - returns an object that includes every state that 
-   *   would pass a `$state.includes()` test.
+   *   would pass a `$state.includes()` test.c.
    *
    * @example
    * <pre>
@@ -3280,11 +3280,11 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
      *
      * @param {string|object} stateOrName The state name (absolute or relative) or state object you'd like to check.
      * @param {object=} params A param object, e.g. `{sectionId: section.id}`, that you'd like
-     * to test against the current active state.
+     * to test.c against the current active state.
      * @param {object=} options An options object.  The options are:
      *
      * - **`relative`** - {string|object} -  If `stateOrName` is a relative state name and `options.relative` is set, .is will
-     * test relative to `options.relative` state (or name).
+     * test.c relative to `options.relative` state (or name).
      *
      * @returns {boolean} Returns true if it is the state.
      */
@@ -3305,7 +3305,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
      * @description
      * A method to determine if the current active state is equal to or is the child of the
      * state stateName. If any params are passed then they will be tested for a match as well.
-     * Not all the parameters need to be passed, just the ones you'd like to test for equality.
+     * Not all the parameters need to be passed, just the ones you'd like to test.c for equality.
      *
      * @example
      * Partial and relative names
@@ -3340,11 +3340,11 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
      * @param {string} stateOrName A partial name, relative name, or glob pattern
      * to be searched for within the current state name.
      * @param {object=} params A param object, e.g. `{sectionId: section.id}`,
-     * that you'd like to test against the current active state.
+     * that you'd like to test.c against the current active state.
      * @param {object=} options An options object.  The options are:
      *
      * - **`relative`** - {string|object=} -  If `stateOrName` is a relative state reference and `options.relative` is set,
-     * .includes will test relative to `options.relative` state (or name).
+     * .includes will test.c relative to `options.relative` state (or name).
      *
      * @returns {boolean} Returns true if it does include the state
      */
