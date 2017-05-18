@@ -11,5 +11,10 @@ app.config([
                 templateUrl: '/template/home.html',
                 controller: 'HomeCtrl'
             })
+            .state('blank',{
+                url:'/blank',
+                templateUrl: '/template/blank.html',
+            })
+
         $urlRouterProvider.otherwise('home');
     }]);

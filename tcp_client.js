@@ -9,7 +9,7 @@ var client = net.connect(8888,'10.131.201.201', function(){
     var json = {
         "command":"getVideoList"
     };
-/*
+
     var json = {
         "command":"postVideoTask",
         "videoname":"big_v.mp4",
@@ -38,7 +38,7 @@ var client = net.connect(8888,'10.131.201.201', function(){
             }
         ]
     };
-*/
+
     var data = JSON.stringify(json);
     client.write(data);
 });

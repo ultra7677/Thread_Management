@@ -11,7 +11,7 @@
                 <div class="modal-body">
                     <div class="input-group" style="width: 95%; margin: 0 auto">
                         <span class="input-group-addon" id="sizing-addon1" style="width: 110px">目标视频名称</span>
-                        <input type="text" ng-model="filename" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+                        <input type="text" ng-model="filename" class="form-control" aria-describedby="sizing-addon1">
                     </div>
                     <div class="input-group" style="width: 95%; margin: 0 auto; margin-top: 10px">
                         <span class="input-group-addon" id="sizing-addon2" style="width: 110px">目标视频宽度</span>
@@ -40,6 +40,7 @@
            <span class="panel-title">
                 {{currentVideo.videoname}}
             </span>
+            <button id="pause-button" type="button" class="btn btn-xs" ng-click="pauseVideoTask()" style=" float: right; display: none" >暂停</button>
             <button id="submit-button" type="button" class="btn btn-xs" ng-click="postVideoTask()" style=" float: right; display: none" >提交</button>
         </div>
 
@@ -54,7 +55,7 @@
                     <td style="text-align: center"> 目标码率 </td>
                     <td style="text-align: center; width: 100px"> 当前进度 </td>
                     <td style="text-align: center">
-                        <span class="glyphicon glyphicon-plus" aria-hidden="true" ng-click="addTask()"></span>
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true" ng-click="addTask()" style="cursor: pointer;"></span>
                     </td>
                 </tr>
             </thead>
@@ -66,12 +67,11 @@
                     <td style="text-align: center"><span>{{task.bitrate}}</span></td>
                     <td style="text-align: center;"><span>
                         <div class="progress" style="margin-bottom: 0;">
-                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                                60%
+                            <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" ng-style="{'width':task.currentProgress*100+'%'}">
                             </div>
                         </div>
                     </span></td>
-                    <td style="text-align: center"><span><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></span></td>
+                    <td style="text-align: center"><span><span class="glyphicon glyphicon-minus" aria-hidden="true" ng-click="deleteTask(task)" style="cursor: pointer;"></span></span></td>
                 </tr>
             </tbody>
         </table>
@@ -79,10 +79,28 @@
 </div>
 
 <div class="list-container col-md-3" style="margin-left: 20px;">
-    <div class="list-group">
-        <a ng-repeat="video in videoList" class="list-group-item" ng-click="showVideo(video)" id="video{{video.id}}">
-            {{video.videoname}}
-        </a>
+    <div class="panel panel-default">
+
+        <div class="panel-heading">
+           <span class="panel-title">
+               当前视频列表
+            </span>
+            <label class="custom-file-upload glyphicon glyphicon-plus" for="video-upload" style="float: right;cursor: pointer;" aria-hidden="true">
+                <i class="fa fa-cloud-upload"></i>
+            </label>
+            <input id="video-upload" type="file" ng-file-select="onFileSelect()" style="display:none">
+            <div id="video-progress"class="progress" style="margin-bottom: 0; margin-top:10px; display: none">
+                <div id="video-progress-bar" class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
+                </div>
+            </div>
+        </div>
+
+        <div class="list-group">
+            <a ng-repeat="video in videoList" class="list-group-item" ng-click="showVideo(video)" id="video{{video.id}}">
+                {{video.videoname}}
+            </a>
+        </div>
+
     </div>
 </div>
 
